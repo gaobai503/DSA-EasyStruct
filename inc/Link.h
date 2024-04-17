@@ -18,10 +18,18 @@ struct LINK{
     struct DATATYPE type;
 };
 
+struct QUEUE{
+    struct NODE *front;
+    struct NODE *rear;
+    struct DATATYPE type;
+};
+
 typedef struct DATATYPE datatype;
 typedef struct NODE node;
 typedef struct LINK link;
+typedef link stack;
 typedef node *position;
+typedef struct QUEUE *queue;
 
 link MakeNullLink(datatype type);
 
@@ -37,5 +45,21 @@ position Next(link L, position p);
 position Previous(link L, position);
 position First(link L);
 position End(link L);
+
+stack MakeNullStack(datatype type);
+
+int Pop(stack S);
+int Push(stack S, void *data);
+int EmptyStack(stack S);
+int FreeStack(stack S);
+void *Topelement(stack S);
+
+queue MakeNullQueue(datatype type);
+
+int EnQueue(queue Q, void *data);
+int DeQueue(queue Q);
+int EmptyQueue(queue Q);
+int FreeQueue(queue Q);
+void *Front(queue Q);
 
 #endif // !LINK_H

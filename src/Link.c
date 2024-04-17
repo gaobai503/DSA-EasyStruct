@@ -111,3 +111,98 @@ position End(link L){
     while(p->next->next) p=p->next;
     return p;
 }
+
+stack MakeNullStack(datatype type){
+    position p = (position)malloc(sizeof(struct NODE));
+    stack Emp = {NULL, type};
+    if(!p){
+	return Emp;
+    }
+    p->data = NULL;
+    p->next = NULL;
+    stack S = {p, type};
+    return S;
+}
+
+int Pop(stack S){
+    if(EmptyStack(S)) return 1;
+    return Delete(S, First(S));;
+}
+
+int Push(stack S, void *data){
+    if(EmptyStack(S)) return 1;
+    return Insert(S, First(S), data);
+}
+
+int EmptyStack(stack S){
+    if(End(S) == NULL) return 1;
+    return 0;
+}
+
+int FreeStack(stack S){
+    if(!S) return -1;
+    while(!EmptyStack(S)){
+	Pop(S);
+    }
+    return 0;
+}
+
+void *Topelement(stack S){
+    return Retrieve(S, First(S));
+}
+
+queue MakeNullQueue(datatype type){
+    position N = (position)malloc(sizeof(node));
+    N->data = NULL;
+    N->next = NULL;
+    queue Q = (queue)malloc(sizeof(struct QUEUE));
+    Q->front = N;
+    Q->rear = NULL;
+    Q->type = type;
+    return Q;
+}
+
+int EnQueue(queue Q, void *data){
+    if(!Q) return -1;
+    link L = {Q->front, Q->type};
+    if(!Q->rear){
+	Insert(L, First(L), data);
+	Q->rear = Q->front;
+	return 0;
+    }
+    Insert(L, Next(L, Q->rear), data);
+    Q->rear = Next(L, Q->rear);
+    return 0;
+}
+
+int DeQueue(queue Q){
+    if(!Q) return -1;
+    if(EmptyQueue(Q)) return 1;
+    link L = {Q->front, Q->type};
+    Delete(L, First(L));
+    if(Q->rear == Q->front){
+	Q->rear = NULL;
+	return 0;
+    }
+    Q->rear = End(L);
+    return 0;
+}
+
+int EmptyQueue(queue Q){
+    if(!Q->rear) return 1;
+    return 0;
+}
+
+void *Front(queue Q){
+    if(!Q) return NULL;
+    link L = {Q->front, Q->type};
+    return Retrieve(L, First(L));
+}
+
+int FreeQueue(queue Q){
+    if(!Q) return -1;
+    while(!EmptyQueue(Q)){
+	DeQueue(Q);
+    }
+    return 0;
+}
