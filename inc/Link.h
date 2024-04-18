@@ -2,6 +2,7 @@
 #ifndef LINK_H
 #define LINK_H
 #define MAX_POINTER
+#include <stdio.h>
 struct DATATYPE{
     size_t size;
     unsigned pointer_count;

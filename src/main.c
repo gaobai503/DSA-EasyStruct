@@ -2,11 +2,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "Link.h"
+#include "Tree.h"
 typedef struct{
     char *a;
     char *b;
     int i;
 }foo;
+void Print(btree bt, stack S){
+    printf("-----%d\n", *(int*)Data(bt));
+    return;
+}
+
 int main(){
     FILE *fp = fopen("./Test/test.txt", "r");
     if(!fp){
@@ -28,6 +34,28 @@ int main(){
     pointer_size[0] = 3;
     pointer_size[1] = 3;
     datatype type = {sizeof(loo), 2, pointer_size};
+    datatype INT_TYPE = {sizeof(int), 0, NULL};
+    int r = 1;
+    int s = 2;
+    int t = 3;
+    int z = 0;
+    btree l = BtreeCreate(&s, INT_TYPE, MakeNullBtree(INT_TYPE),  MakeNullBtree(INT_TYPE));
+    btree R = BtreeCreate(&t, INT_TYPE, MakeNullBtree(INT_TYPE),  MakeNullBtree(INT_TYPE));
+    btree n = BtreeCreate(&r, INT_TYPE, l, R);
+    int dataset[13] = {1,2,3,0,0,4,0,0,5,6,0,0,0};
+    stack S = MakeNullStack(INT_TYPE);
+
+    btree bt = PreCreBtree(dataset, 13, INT_TYPE);
+
+    LevelOrder(bt, S, Print);
+    printf("IsComTree: %d\n", IsComTree(n));
+    printf("Tree Width: %d\n", BtreeWidth(n));
+    
+    //printf("----%d----\n", *(int*)Data(bt));
+    //printf("%d\n", BtreeWidth(n));
+    //PreOrderRec(n, S, Print);
+
+
 
     queue Q = MakeNullQueue(type);
 

@@ -5,7 +5,7 @@
 link MakeNullLink(datatype type){
     position p = (position)malloc(sizeof(struct NODE));
     link Emp = {NULL, type};
-    if(!p){
+    if(p == NULL){
 	return Emp;
     }
     p->data = NULL;
@@ -18,7 +18,7 @@ int Insert(link L, position p, void *data){
     position q = NULL;
     q = (position)malloc(sizeof(struct NODE));
     q->data = malloc(sizeof(void *));
-    if(!q){
+    if(q == NULL){
 	return 1;
     }
     q->next = p->next;
@@ -53,7 +53,7 @@ int Delete(link L, position p){
 }
 
 int IsEOL(link L, position p){
-    if(!p->next) return 1;
+    if(p->next==NULL) return 1;
     return 0;
 }
 
@@ -103,19 +103,19 @@ position First(link L){
 }
 position End(link L){
     position p = L.addr;
-    if(!p->next)
+    if(p->next == NULL)
     {
 	/*Empty link*/
 	return NULL;
     }
-    while(p->next->next) p=p->next;
+    while(p->next->next != NULL) p=p->next;
     return p;
 }
 
 stack MakeNullStack(datatype type){
     position p = (position)malloc(sizeof(struct NODE));
     stack Emp = {NULL, type};
-    if(!p){
+    if(p == NULL){
 	return Emp;
     }
     p->data = NULL;
@@ -130,7 +130,6 @@ int Pop(stack S){
 }
 
 int Push(stack S, void *data){
-    if(EmptyStack(S)) return 1;
     return Insert(S, First(S), data);
 }
 
@@ -140,7 +139,6 @@ int EmptyStack(stack S){
 }
 
 int FreeStack(stack S){
-    if(!S) return -1;
     while(!EmptyStack(S)){
 	Pop(S);
     }
