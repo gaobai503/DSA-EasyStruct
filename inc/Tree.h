@@ -11,9 +11,9 @@ typedef node *position;
 typedef struct QUEUE *queue;
 
 struct BTREE{
+    void *data;
     struct BTREE *lchild;
     struct BTREE *rchild;
-    void *data;
     datatype type;
 };
 
