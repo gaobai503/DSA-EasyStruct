@@ -4,6 +4,11 @@
 #include "Link.h"
 extern int counter;
 
+struct FRECH{
+    char ch;
+    unsigned fre;
+};
+
 struct CMPKEY{
     size_t pokeyoffset;
     size_t keyoffset;

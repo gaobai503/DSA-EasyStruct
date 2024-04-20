@@ -88,7 +88,8 @@ btree BtreeCreate(void *data, datatype type, btree lchild, btree rchild){
     if(!bt){
 	return NULL;
     }
-    bt->data = data;
+    bt->data = malloc(type.size);
+    memcpy(bt->data, data, type.size);
     unsigned pointers = type.pointer_count;
     size_t *size = type.pointer_size;
     void **strdata = (void **)data;
